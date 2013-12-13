@@ -65,7 +65,7 @@
          char)
     (cl-loop for index from (1- str-len) downto 0
           do (progn
-               (setq char (downcase (aref str index)))
+               (setq char (aref str index))
                (push index (gethash char res))))
     (puthash 'heatmap (funcall heatmap-func str) res)
     res))
@@ -271,7 +271,6 @@ e.g. (\"aab\" \"ab\") returns
 
 (defun flx-score (str query &optional cache)
   "return best score matching QUERY against STR"
-  (setq query (downcase query))
   (unless (or (zerop (length query))
               (zerop (length str)))
     (let* ((info-hash (flx-process-cache str cache))
